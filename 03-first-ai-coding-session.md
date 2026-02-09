@@ -413,7 +413,7 @@ A good prompt for code generation has three components:
 
 ### Prompt Anatomy Diagram
 
-```
+```text
 +-------------------------------------------------------------------------+
 |                         PROMPT ANATOMY                                  |
 +-------------------------------------------------------------------------+
