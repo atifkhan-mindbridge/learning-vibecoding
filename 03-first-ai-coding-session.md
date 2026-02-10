@@ -38,7 +38,7 @@ Several tools enable AI-assisted coding. Here are the major options:
 - Visual development workflows
 - Inline code completion
 - Developers who prefer IDEs
-- Multi-model support (Claude, GPT-4, etc.)
+- Multi-model support (Claude Opus 4.6, GPT-5.2, o3, etc.)
 
 ### GitHub Copilot
 

@@ -18,7 +18,7 @@ In [Step 01](01-understanding-ai-assisted-coding.md), we introduced the spectrum
 
 ## What Is a Large Language Model (LLM)?
 
-A **Large Language Model** is an AI system trained on massive amounts of text to predict what comes next in a sequence. When you use Claude, GPT-4, or Gemini for coding, you're using an LLM.
+A **Large Language Model** is an AI system trained on massive amounts of text to predict what comes next in a sequence. When you use Claude Opus 4.6, GPT-5.2, or Gemini 3 Pro for coding, you're using an LLM.
 
 ### How Training Works
 
@@ -258,14 +258,16 @@ Tokens (ID -> text):
 
 The **context window** is the maximum amount of text (measured in tokens) an LLM can "see" at once. This includes both your prompt and the model's response.
 
-### Current Context Window Sizes (2026)
+### Current Context Window Sizes (February 2026)
 
-| Model | Context Window |
-|-------|---------------|
-| Claude 3.5/4 | 200,000 tokens |
-| GPT-4 Turbo | 128,000 tokens |
-| Gemini 1.5 Pro | 1,000,000+ tokens |
-| Claude with extended context | Up to 1,000,000 tokens |
+| Model | Context Window | Notes |
+|-------|---------------|-------|
+| Claude Opus 4.6 | 200,000 tokens (1M beta) | Latest frontier model, Feb 2026 |
+| Claude Sonnet 4.5 | 200,000 tokens | Balanced performance/speed |
+| GPT-5.2 | 400,000 tokens | Released Dec 2025 |
+| o3 / o4-mini | 128,000 tokens | OpenAI reasoning models |
+| Gemini 2.5 Pro | 1,000,000 tokens (2M coming) | Largest production context |
+| Gemini 3 Pro | 1,000,000 tokens | Preview available |
 
 **Rough conversion:** 1 token ≈ 4 characters in English, so 200K tokens ≈ 800K characters ≈ a medium-sized codebase.
 
@@ -985,35 +987,81 @@ When in doubt, check the official documentation before running AI-generated code
 
 ## Model Comparison
 
-Different models have different strengths for coding tasks:
+Different models have different strengths for coding tasks. As of February 2026, the landscape includes frontier models, specialized reasoning models, and competitive open-source options.
 
 ### Claude (Anthropic)
 
-- **Strengths:** Strong reasoning, follows complex instructions, good at explaining code
-- **Context:** 200K tokens standard
-- **Best for:** Complex refactoring, code explanation, architectural discussions
+- **Current version:** Claude Opus 4.6 (Feb 2026), Claude Sonnet 4.5
+- **Strengths:** Strong reasoning, follows complex instructions, excellent at explaining code, agent teams capability
+- **Context:** 200K tokens standard (1M beta for Opus 4.6)
+- **SWE-bench:** 80.8% (Opus 4.6)
+- **Best for:** Complex refactoring, code explanation, architectural discussions, agentic workflows
 
-### GPT-4 (OpenAI)
+### GPT-5.2 (OpenAI)
 
+- **Current version:** GPT-5.2 (Dec 2025)
 - **Strengths:** Broad knowledge, good at common patterns, extensive tool integrations
-- **Context:** 128K tokens
-- **Best for:** General coding tasks, well-documented libraries
+- **Context:** 400K tokens
+- **SWE-bench:** ~75%
+- **Best for:** General coding tasks, well-documented libraries, multi-modal applications
 
 ### Gemini (Google)
 
-- **Strengths:** Very long context (1M+ tokens), good at multi-file analysis
-- **Context:** 1,000,000+ tokens
-- **Best for:** Large codebase analysis, comprehensive code review
+- **Current versions:** Gemini 2.5 Pro, Gemini 3 Pro (preview)
+- **Strengths:** Very long context (1M+ tokens, 2M coming), good at multi-file analysis
+- **Context:** 1,000,000 tokens (2M coming for 2.5 Pro)
+- **SWE-bench:** 63.8% (2.5 Pro)
+- **Best for:** Large codebase analysis, comprehensive code review, projects requiring massive context
+
+### Reasoning Models (OpenAI o-series)
+
+The o-series models represent a distinct approach: they use extended internal reasoning (chain-of-thought) before responding, making them excel at complex problem-solving.
+
+- **o3:** Full reasoning model, 128K context, 71.7% SWE-bench
+- **o4-mini:** Faster reasoning model, 128K context, cost-efficient for reasoning tasks
+
+**When to use reasoning models:**
+- Complex algorithmic problems requiring step-by-step logic
+- Debugging intricate issues with many interdependent factors
+- Mathematical or formal verification tasks
+- Problems where "thinking longer" improves accuracy
+
+**When standard models are better:**
+- Simple code generation where speed matters
+- Tasks requiring very long context (o-series limited to 128K)
+- Creative or open-ended coding exploration
+- Cost-sensitive applications (reasoning models use more tokens)
+
+### Open-Source Models
+
+Open-source models have become competitive with proprietary options, offering flexibility, cost control, and local deployment:
+
+| Model | Parameters | Architecture | License | Notes |
+|-------|------------|--------------|---------|-------|
+| DeepSeek V3.2 | 685B (37B active) | MoE | MIT | Competitive with frontier models |
+| Llama 4 Behemoth | 2T (MoE) | MoE | Llama License | 10M context window |
+| Mistral 3 Large | 675B (41B active) | MoE | Apache 2.0 | Strong coding performance |
+| Qwen3-Coder-Next | — | Dense | Apache 2.0 | Competitive with Claude Sonnet 4.5 |
+
+**Considerations for open-source:**
+- **Cost:** No per-token fees when self-hosted
+- **Privacy:** Code never leaves your infrastructure
+- **Customization:** Can fine-tune on proprietary codebases
+- **Trade-offs:** Requires infrastructure, may lag on latest capabilities
 
 ### Choosing a Model
 
-| Task | Recommended |
-|------|-------------|
-| Single function generation | Any model works well |
-| Multi-file refactoring | Claude or Gemini (long context) |
-| Learning new concepts | Any model with explanation emphasis |
-| Security-sensitive code | Use any, but always manually review |
-| Complex architecture | Claude (strong reasoning) |
+| Task | Recommended | Why |
+|------|-------------|-----|
+| Single function generation | Any model | All current models handle this well |
+| Multi-file refactoring | Claude Opus 4.6 or Gemini | Long context + strong reasoning |
+| Complex algorithmic problems | o3 or Claude Opus | Reasoning capabilities |
+| Learning new concepts | Any model | Explanation quality is universally good |
+| Security-sensitive code | Any, with review | Always manually review; 45% vulnerability rate persists |
+| Complex architecture | Claude Opus 4.6 | Best reasoning + agent capabilities |
+| Large codebase analysis | Gemini 2.5 Pro | 1M+ context handles entire codebases |
+| Cost-sensitive projects | Open-source or o4-mini | Self-hosting or efficient reasoning |
+| Privacy-critical work | Open-source (self-hosted) | Code stays on your infrastructure |
 
 ---
 

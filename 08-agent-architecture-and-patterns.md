@@ -32,7 +32,7 @@ An **agent** is an AI system that can:
 Agent = LLM + Tools + Autonomy
 ```
 
-- **LLM:** The reasoning engine (Claude, GPT-4, etc.)
+- **LLM:** The reasoning engine (Claude Opus 4.6, GPT-5.2, Gemini 3 Pro, o3, etc.)
 - **Tools:** Capabilities to act in the world (file editing, shell commands, APIs)
 - **Autonomy:** Ability to decide what to do next without human intervention
 

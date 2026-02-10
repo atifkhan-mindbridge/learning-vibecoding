@@ -2661,7 +2661,7 @@ A simple task manager with:
 
 1. **Anthropic Engineering Blog**
    - "Effective Harnesses for Long-Running Agents" (2025) - https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
-   - "Claude 4 Prompting Guide - Multi-Context Workflows"
+   - "Claude Opus 4.6 Prompting Guide - Multi-Context Workflows"
    - State persistence strategies for agentic workflows
 
 2. **Academic Papers**
